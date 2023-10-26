@@ -104,6 +104,8 @@ namespace R3nzSkinInjector {
 
 			if (File::Exists(settingsFilePath)) {
 				this->toolstripmenuItem2->Checked = System::Boolean::Parse(File::ReadAllText(settingsFilePath));
+			} else {
+				this->toolstripmenuItem2->Checked = true;
 			}
 		}
 		void renameProgram()

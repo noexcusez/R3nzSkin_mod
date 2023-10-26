@@ -48,8 +48,11 @@ static LRESULT WINAPI wndProc(const HWND window, const UINT msg, const WPARAM wP
 
 	if (msg == WM_KEYDOWN) {
 		if (wParam == cheatManager.config->menuKey.getKey()) {
+
+			cheatManager.config->autoClose = false;
 			cheatManager.gui->is_open = !cheatManager.gui->is_open;
 			if (!cheatManager.gui->is_open)
+				cheatManager.config->autoClose = true;
 				cheatManager.config->save();
 		} else if (wParam == 0x35) {
 			const auto player{ cheatManager.memory->localPlayer };

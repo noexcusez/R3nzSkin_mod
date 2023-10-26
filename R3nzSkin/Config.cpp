@@ -39,6 +39,7 @@ void Config::save() noexcept
 	config_json["previousSkinKey"] = this->previousSkinKey.toString();
 	config_json["heroName"] = this->heroName;
 	config_json["raibowText"] = this->rainbowText;
+	config_json["autoClose"] = this->autoClose;
 	config_json["quickSkinChange"] = this->quickSkinChange;
 	config_json["fontScale"] = this->fontScale;
 	config_json["current_combo_ward_index"] = this->current_combo_ward_index;
@@ -75,11 +76,12 @@ void Config::load() noexcept
 		this->current_combo_skin_index = config_json.value(std::string(player->get_character_data_stack()->base_skin.model.str) + ".current_combo_skin_index", 0);
 
 	this->menuKey = KeyBind(config_json.value("menuKey", "INSERT").c_str());
-	this->nextSkinKey = KeyBind(config_json.value("nextSkinKey", "PAGE_UP").c_str());
-	this->previousSkinKey = KeyBind(config_json.value("previousSkinKey", "PAGE_DOWN").c_str());
+	this->nextSkinKey = KeyBind(config_json.value("nextSkinKey", "ADD").c_str());
+	this->previousSkinKey = KeyBind(config_json.value("previousSkinKey", "SUBTRACT").c_str());
 	this->heroName = config_json.value("heroName", true);
 	this->rainbowText = config_json.value("raibowText", false);
-	this->quickSkinChange = config_json.value("quickSkinChange", false);
+	this->autoClose = config_json.value("autoClose", true);
+	this->quickSkinChange = config_json.value("quickSkinChange", true);
 	this->fontScale = config_json.value("fontScale", 1.0f);
 	this->current_combo_ward_index = config_json.value("current_combo_ward_index", 0);
 	this->current_ward_skin_index = config_json.value("current_ward_skin_index", -1);
@@ -106,11 +108,12 @@ void Config::load() noexcept
 void Config::reset() noexcept
 {
 	this->menuKey = KeyBind(KeyBind::INSERT);
-	this->nextSkinKey = KeyBind(KeyBind::PAGE_UP);
-	this->previousSkinKey = KeyBind(KeyBind::PAGE_DOWN);
+	this->nextSkinKey = KeyBind(KeyBind::ADD);
+	this->previousSkinKey = KeyBind(KeyBind::SUBTRACT);
 	this->heroName = true;
 	this->rainbowText = true;
-	this->quickSkinChange = false;
+	this->autoClose = true;
+	this->quickSkinChange = true;
 	this->fontScale = 1.0f;
 	this->current_combo_skin_index = 0;
 	this->current_combo_ward_index = 0;

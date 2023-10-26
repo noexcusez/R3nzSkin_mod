@@ -18,12 +18,17 @@ public:
 	void reset() noexcept;
 
 	KeyBind menuKey{ KeyBind(KeyBind::INSERT) };
-	KeyBind nextSkinKey{ KeyBind(KeyBind::PAGE_UP) };
-	KeyBind previousSkinKey{ KeyBind(KeyBind::PAGE_DOWN) };
+	KeyBind nextSkinKey{ KeyBind(KeyBind::ADD) };
+	KeyBind previousSkinKey{ KeyBind(KeyBind::SUBTRACT) };
 	bool rainbowText{ false };
 	float fontScale{ 1.0f };
 	bool heroName{ true };
-	bool quickSkinChange{ false };
+	bool quickSkinChange{ true };
+
+	// autoclose on start
+	bool autoClose{ true };
+
+
 	// player
 	std::int32_t current_combo_skin_index{ 0 };
 

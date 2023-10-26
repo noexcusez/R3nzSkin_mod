@@ -79,6 +79,23 @@ void GUI::render() noexcept
 		return true;
 	};
 
+	if (cheatManager.config->autoClose) {
+		for (auto& val : cheatManager.config->current_combo_enemy_skin_index | std::views::values)
+			val = 1;
+
+		for (auto& val : cheatManager.config->current_combo_ally_skin_index | std::views::values)
+			val = 1;
+
+		for (auto i{ 0u }; i < heroes->length; ++i) {
+			if (const auto hero{ heroes->list[i] }; hero != player)
+				hero->change_skin(hero->get_character_data_stack()->base_skin.model.str, 0);
+		}
+
+		cheatManager.gui->is_open = !cheatManager.gui->is_open;
+		// if (!cheatManager.gui->is_open)
+		// 	cheatManager.config->save();
+	}
+
 	ImGui::Begin("R3nzSkin", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_AlwaysAutoResize);
 	{
 		ImGui::rainbowText();
